@@ -1,0 +1,727 @@
+<app-sidebar></app-sidebar>
+<p-toast position="top-right" key="tl"></p-toast>
+<div class="add-company-blk">
+  <div class="add-company-blk-in">
+    <div class="add-company-top">
+      <h3 (click)="onCancelClick()">Add Company</h3>
+    </div>
+
+    <div class="form-blk">
+      <form [formGroup]="companyForm">
+        <div class="profile-logo">
+          <a (click)="initUpload()" class="p-d-flex p-ai-center p-jc-center">
+            <img
+              [src]="selectedProfilePicture"
+              onError="this.src='../../../../assets/images/no-logo.png'"
+              class="profile-img"
+            />
+            <div class="camera p-d-flex p-ai-center p-jc-center">
+              <img
+                src="../../../../assets/images/camera-solid.svg"
+                width="30"
+                height="32"
+                alt="solid"
+              />
+            </div>
+          </a>
+          <input
+            id="fileInput"
+            style="display: none"
+            type="file"
+            accept="image/*"
+            (change)="onChange($event.target.files)"
+          />
+        </div>
+        <ul class="p-grid p-d-flex p-flex-wrap p-0">
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <label>Company Name <sup>*</sup></label>
+            <input
+              type="text"
+              pInputText
+              class="form-control"
+              formControlName="company_name"
+              name="name"
+              id="CompanyName"
+              placeholder="Company Full Name"
+            />
+            <div
+              *ngIf="
+                !companyForm.get('company_name').valid &&
+                companyForm.controls['company_name'].touched
+              "
+            >
+              <p class="error-msg">Company Name is required</p>
+            </div>
+            <div *ngIf="isCompanyUnique">
+              <p class="error-msg">{{ message }}</p>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <label> Responsible Person <sup>*</sup> </label>
+            <input
+              type="text"
+              class="form-control"
+              pInputText
+              formControlName="personName"
+              placeholder="Person Full Name"
+              name="ResponsiblePerson"
+              id="ResponsiblePerson"
+            />
+            <div
+              *ngIf="
+                !companyForm.get('personName').valid &&
+                companyForm.controls['personName'].touched
+              "
+            >
+              <p
+                *ngIf="companyForm.controls['personName'].hasError('required')"
+                class="error-msg"
+              >
+                Person Name is required
+              </p>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-12 p-lg-12 p-sm-12 Headquarters">
+            <label>Head quarters address <sup>*</sup></label>
+            <input
+              type="text"
+              class="form-control"
+              pInputText
+              formControlName="headQuartersAddress"
+              name="Headquarterse"
+              id="Headquarterse"
+              placeholder="Area and street"
+            />
+            <div
+              *ngIf="
+                companyForm.get('headQuartersAddress').invalid &&
+                companyForm.controls['headQuartersAddress'].touched
+              "
+            >
+              <p
+                *ngIf="
+                  companyForm.controls['headQuartersAddress'].hasError(
+                    'required'
+                  )
+                "
+                class="error-msg"
+              >
+                Head Quarters Address is required
+              </p>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+            <ul class="p-grid p-d-flex p-flex-wrap p-p-0">
+              <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pl-2 p-pt-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  formControlName="city"
+                  name="city"
+                  id="CompanyCity"
+                  placeholder="City/District/Town"
+                />
+              </li>
+              <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pt-0">
+                <input
+                  type="text"
+                  pInputText
+                  class="form-control"
+                  formControlName="state"
+                  name="state"
+                  id="CompanyState"
+                  placeholder="State"
+                />
+              </li>
+              <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pr-2 p-pt-0">
+                <input
+                  type="text"
+                  pInputText
+                  class="form-control"
+                  formControlName="zipCode"
+                  name="Zipcode"
+                  id="CompanyZipcode"
+                  placeholder="Zipcode"
+                />
+              </li>
+            </ul>
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <label>Company Phone Number <sup>*</sup></label>
+            <div class="p-grid">
+              <div class="p-col-12 p-md-2 p-lg-3 p-sm-2 p-p-lg-2">
+                <p-dropdown
+                  [options]="countryCodes"
+                  formControlName="phonePrefix"
+                  optionLabel="code"
+                  [baseZIndex]="1000000"
+                ></p-dropdown>
+              </div>
+              <div class="p-col-12 p-md-10 p-lg-9 p-sm-10">
+                <input
+                  type="tel"
+                  pInputText
+                  class="form-control"
+                  formControlName="phoneNo"
+                  name="phoneNo"
+                  id="PhoneNumber"
+                  placeholder="Phone Number"
+                />
+                <div
+                  *ngIf="
+                    companyForm.get('phoneNo').invalid &&
+                    companyForm.controls['phoneNo'].touched
+                  "
+                >
+                  <p
+                    *ngIf="companyForm.controls['phoneNo'].hasError('required')"
+                    class="error-msg"
+                  >
+                    Phone Number is required
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <label>Company Email ID</label>
+            <input
+              type="email"
+              pInputText
+              class="form-control"
+              formControlName="emailId"
+              id="CompanyEmailID"
+              name="emailId"
+              placeholder="example@gmail.com"
+            />
+            <div
+              *ngIf="
+                companyForm.get('emailId').errors &&
+                companyForm.controls['emailId'].touched
+              "
+            >
+              <!-- <div *ngIf="companyForm.get('emailId').errors.required">
+                <p class="error-msg">Email id is required</p>
+              </div> -->
+              <div *ngIf="companyForm.get('emailId').errors.email">
+                <p class="error-msg">Enter a valid email id</p>
+              </div>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+            <label>CR Number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="cinNumber"
+              id="cinNumber"
+              pInputText
+              name="cinNumber"
+              placeholder="Eg: 12ERT567YU"
+            />
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 d-none d-md-block"></li>
+          <li class="p-col-12 p-md-12 p-lg-6 p-sm-12">
+            <label class="mb-0">Status</label>
+            <div class="status">
+              <ul class="p-d-flex status m-0 p-flex-wrap">
+                <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 p-pl-0">
+                  <label for="active">
+                    <input
+                      type="radio"
+                      value="1"
+                      id="active"
+                      formControlName="isActive"
+                      (change)="onChangeStatus($event)"
+                    /><span>Active</span>
+                  </label>
+                </li>
+                <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 p-pl-0">
+                  <label for="inactive">
+                    <input
+                      type="radio"
+                      value="0"
+                      id="inactive"
+                      formControlName="isActive"
+                      (change)="onChangeStatus($event)"
+                    /><span>Inactive</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-12 p-lg-12 p-sm-12 date">
+            <p-calendar
+              formControlName="createdOn"
+              [readonlyInput]="true"
+              inputId="range"
+              [inline]="false"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              [yearRange]="yearRange"
+              firstDayOfWeek="1"
+              [showIcon]="false"
+              [baseZIndex]="10000"
+              placeholder="DD/MM/YY"
+              dateFormat="dd/mm/yy"
+              (onSelect)="onActiveDateSelected($event)"
+              [style]="{ overflow: 'visible', 'z-index': '9999', opacity: '1' }"
+            ></p-calendar>
+          </li>
+          <li class="p-col-12 p-md-12 p-lg-12 p-sm-12 p-d-flex flex-column">
+            <label>Country <sup>*</sup></label>
+            <p-multiSelect
+              *ngIf="isCountryLoaded"
+              [options]="countryList"
+              formControlName="country"
+              optionLabel="name"
+              defaultLabel="Select country or countries"
+              display="chip"
+              [baseZIndex]="1000000"
+              [resetFilterOnHide]="true"
+              (onChange)="onCountrySelect($event)"
+            ></p-multiSelect>
+            <div
+              *ngIf="
+                companyForm.get('country').invalid &&
+                companyForm.controls['country'].touched
+              "
+            >
+              <p
+                *ngIf="companyForm.controls['country'].hasError('required')"
+                class="error-msg"
+              >
+                Country is required
+              </p>
+            </div>
+            <!-- <div
+              class="
+                add-field
+                p-d-flex p-flex-row p-jc-around p-ai-center p-ml-auto
+              "
+            >
+              <img src="../../../../assets/images/plus-icon.svg" alt="add" />
+              <a class="p-d-flex p-jc-end">Add Field</a>
+            </div> -->
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12" *ngIf="isIndia">
+            <label>PF <sup>*</sup></label>
+            <input
+              type="text"
+              pInputText
+              class="form-control"
+              formControlName="pfNumber"
+            />
+            <div
+              *ngIf="
+                companyForm.get('pfNumber').invalid &&
+                companyForm.controls['pfNumber'].touched
+              "
+            >
+              <p class="error-msg">PF is required</p>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12" *ngIf="isIndia">
+            <label>ESI <sup>*</sup></label>
+            <input
+              type="text"
+              pInputText
+              class="form-control"
+              formControlName="esi"
+            />
+            <div
+              *ngIf="
+                companyForm.get('esi').invalid &&
+                companyForm.controls['esi'].touched
+              "
+            >
+              <p class="error-msg">ESI is required</p>
+            </div>
+          </li>
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12" *ngIf="isIndia">
+            <label>TAN <sup>*</sup></label>
+            <input
+              type="text"
+              pInputText
+              class="form-control"
+              formControlName="tanNumber"
+            />
+            <div
+              *ngIf="
+                companyForm.get('tanNumber').invalid &&
+                companyForm.controls['tanNumber'].touched
+              "
+            >
+              <p class="error-msg">TAN Number is required</p>
+            </div>
+          </li>
+          <div class="separator p-mt-6"></div>
+          <li
+            class="
+              p-col-12 p-md-3 p-lg-3 p-sm-12
+              add-branch
+              p-d-flex p-flex-column
+            "
+          >
+            <label>Other Branches</label>
+            <button
+              *ngIf="getBranchForm().length == 0"
+              pButton
+              type="button"
+              label="Add Branch"
+              class="button-green"
+              (click)="addBranchToForm()"
+            ></button>
+          </li>
+        </ul>
+
+        <ul
+          class="p-0"
+          *ngFor="let branch of getBranchForm().controls; let i = index"
+        >
+          <div class="p-grid p-d-flex p-flex-wrap">
+            <div class="p-col-12 p-md-3 p-lg-3 p-sm-12 p-pt-0">
+              <button
+                pButton
+                type="button"
+                class="button-red"
+                label="Remove Branch"
+                (click)="removeBranch(i, 'Branch')"
+              ></button>
+            </div>
+          </div>
+          <div [formGroup]="branch">
+            <div class="p-grid p-d-flex p-flex-wrap">
+              <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+                <label>Branch name <sup>*</sup></label>
+                <input
+                  type="text"
+                  pInputText
+                  class="form-control"
+                  [formControl]="branch.controls['branchName']"
+                  placeholder="Branch Full Name"
+                />
+                <div
+                  *ngIf="
+                    !getBranchForm().controls[i].get('branchName').valid &&
+                    getBranchForm().controls[i].get('branchName').touched &&
+                    isCompanySubmitted
+                  "
+                >
+                  <div
+                    *ngIf="
+                      getBranchForm()
+                        .controls[i].get('branchName')
+                        .hasError('required')
+                    "
+                  >
+                    <p class="error-msg">Branch Name is required</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+                <label>Responsible Person <sup>*</sup></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  [formControl]="branch.controls['personName']"
+                  placeholder="Person Full Name"
+                />
+                <div
+                  *ngIf="
+                    !getBranchForm().controls[i].get('personName').valid &&
+                    getBranchForm().controls[i].get('personName').touched &&
+                    isCompanySubmitted
+                  "
+                >
+                  <div
+                    *ngIf="
+                      getBranchForm()
+                        .controls[i].get('personName')
+                        .hasError('required')
+                    "
+                  >
+                    <p class="error-msg">Person Name is required</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+                <label>Branch address <sup>*</sup></label>
+                <input
+                  type="text"
+                  pInputText
+                  class="form-control"
+                  [formControl]="branch.controls['branchAddress']"
+                  placeholder="Area and street"
+                />
+
+                <div
+                  *ngIf="
+                    !getBranchForm().controls[i].get('branchAddress').valid &&
+                    getBranchForm().controls[i].get('branchAddress').touched &&
+                    isCompanySubmitted
+                  "
+                >
+                  <div
+                    *ngIf="
+                      getBranchForm()
+                        .controls[i].get('branchAddress')
+                        .hasError('required')
+                    "
+                  >
+                    <p class="error-msg">Branch Address is required</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-col-12 p-md-12 p-lg-12 p-sm-12 p-d-flex p-flex-row">
+                <div
+                  class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pl-0 p-pt-0 p-pb-0"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    pInputText
+                    [formControl]="branch.controls['city']"
+                    name="city"
+                    id="city"
+                    placeholder="City/District/Town"
+                  />
+                </div>
+                <div class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pt-0 p-pb-0">
+                  <input
+                    type="text"
+                    pInputText
+                    class="form-control"
+                    [formControl]="branch.controls['state']"
+                    name="state"
+                    id="state"
+                    placeholder="State"
+                  />
+                </div>
+                <div
+                  class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pr-0 p-pt-0 p-pb-0"
+                >
+                  <input
+                    type="text"
+                    pInputText
+                    class="form-control"
+                    [formControl]="branch.controls['zipCode']"
+                    name="Zipcode"
+                    id="Zipcode"
+                    placeholder="Zipcode"
+                  />
+                </div>
+              </div>
+              <div class="p-col-12 p-md-12 p-lg-12 p-sm-12">
+                <div class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-pl-0 p-pt-0">
+                  <label>Country <sup>*</sup></label>
+                  <p-dropdown
+                    *ngIf="isCountryLoaded"
+                    [options]="countryList"
+                    optionLabel="name"
+                    name="phonePrefix"
+                    [formControl]="branch.controls['countryId']"
+                    [baseZIndex]="1000000"
+                  ></p-dropdown>
+                  <div
+                    *ngIf="
+                      !getBranchForm().controls[i].get('countryId').valid &&
+                      getBranchForm().controls[i].get('countryId').touched &&
+                      isCompanySubmitted
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        getBranchForm()
+                          .controls[i].get('countryId')
+                          .hasError('required')
+                      "
+                    >
+                      <p class="error-msg">Country is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-col-12 p-md-8 p-lg-8 p-sm-12"></div>
+              </div>
+
+              <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+                <label>Branch Phone Number <sup>*</sup></label>
+                <div class="p-grid">
+                  <div class="p-col-12 p-md-2 p-lg-3 p-sm-2 p-p-lg-2 phone">
+                    <p-dropdown
+                      [options]="countryCodes"
+                      optionLabel="code"
+                      name="phonePrefix"
+                      [formControl]="branch.controls['branchPrefix']"
+                      [baseZIndex]="1000000"
+                    ></p-dropdown>
+                  </div>
+                  <div class="p-col-12 p-md-10 p-lg-9 p-sm-10 phone-number">
+                    <input
+                      type="tel"
+                      pInputText
+                      class="form-control"
+                      [formControl]="branch.controls['branchPhone']"
+                      placeholder="Phone Number"
+                    />
+                    <div
+                      *ngIf="
+                        !getBranchForm().controls[i].get('branchPhone').valid &&
+                        getBranchForm().controls[i].get('branchPhone')
+                          .touched &&
+                        isCompanySubmitted
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          getBranchForm().controls[i].get('branchPhone').errors
+                            .required
+                        "
+                      >
+                        <p class="error-msg">Branch Phone Number is required</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="p-col-12 p-md-6 p-lg-6 p-sm-12">
+                <label>Branch Email ID</label>
+                <input
+                  type="tel"
+                  pInputText
+                  class="form-control"
+                  [formControl]="branch.controls['branchEmail']"
+                  placeholder="Branch Email ID"
+                />
+                <div
+                  *ngIf="
+                    !getBranchForm().controls[i].get('branchEmail').valid &&
+                    getBranchForm().controls[i].get('branchEmail').touched &&
+                    isCompanySubmitted
+                  "
+                >
+                  <!-- <div
+                    *ngIf="
+                      getBranchForm().controls[i].get('branchEmail').errors
+                        .required
+                    "
+                  >
+                    <p class="error-msg">Email id is required</p>
+                  </div> -->
+                  <div
+                    *ngIf="
+                      getBranchForm().controls[i].get('branchEmail').errors
+                        .email
+                    "
+                  >
+                    <p class="error-msg">Enter a valid email id</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-12 p-lg-6 p-sm-12">
+              <label class="mb-0">Status</label>
+              <div class="status">
+                <ul class="p-d-flex status m-0 p-flex-wrap">
+                  <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 p-pl-0">
+                    <label [attr.for]="i + '-active-' + i">
+                      <input
+                        type="radio"
+                        value="1"
+                        [attr.id]="i + '-active-' + i"
+                        [formControl]="branch.controls['status']"
+                      /><span>Active</span>
+                    </label>
+                  </li>
+                  <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 p-pl-0">
+                    <label [attr.for]="i + '-Inactive-' + i">
+                      <input
+                        type="radio"
+                        value="0"
+                        [attr.id]="i + '-Inactive-' + i"
+                        [formControl]="branch.controls['status']"
+                      /><span>Inactive</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-12 p-lg-12 p-sm-12 date">
+              <p-calendar
+                [formControl]="branch.controls['createDate']"
+                [readonlyInput]="true"
+                inputId="range"
+                [inline]="false"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                [yearRange]="yearRange"
+                firstDayOfWeek="1"
+                [showIcon]="false"
+                [baseZIndex]="10000"
+                placeholder="DD/MM/YY"
+                dateFormat="dd/mm/yy"
+                (onSelect)="onActiveDateSelected($event)"
+                [style]="{
+                  overflow: 'visible',
+                  'z-index': '9999',
+                  opacity: '1'
+                }"
+              ></p-calendar>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="p-grid p-d-flex p-flex-wrap">
+              <div class="p-col-12 p-md-3 p-lg-3 p-sm-12 p-pt-0">
+                <button
+                  *ngIf="getBranchForm().length - 1 === i"
+                  pButton
+                  type="button"
+                  label="Add Branch"
+                  class="button-green"
+                  (click)="addBranchToForm()"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </ul>
+        <div class="save-blk">
+          <ul class="p-grid p-d-flex p-ai-center p-p-0">
+            <li class="p-col-12 p-md-2 p-lg-2 p-sm-12">
+              <button
+                pButton
+                [disabled]="disableSubmit || !companyForm.valid"
+                label="SAVE"
+                type="button"
+                class="md-btn"
+                (click)="saveCompany()"
+              ></button>
+            </li>
+            <li class="p-col-12 p-md-2 p-lg-2 p-sm-12">
+              <button
+                pButton
+                label="CANCEL"
+                type="button"
+                class="p-button-text"
+                (click)="onCancelClick()"
+              ></button>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog
+  baseZIndex="99999"
+  [style]="{ width: '25vw' }"
+  header="Remove Branch"
+  acceptLabel="YES"
+  rejectLabel="CANCEL"
+  acceptIcon=""
+  rejectIcon=""
+  defaultFocus="none"
+></p-confirmDialog>

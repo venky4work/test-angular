@@ -1,0 +1,48 @@
+<div
+  class="
+    search-blk
+    d-flex
+    flex-row
+    align-items-center
+    justify-content-between
+    flex-wrap
+  "
+>
+  <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input
+      type="text"
+      pInputText
+      placeholder="Search by company name…"
+      [(ngModel)]="searchKey"
+      class="search-input"
+    />
+  </span>
+  <ul
+    class="d-flex flex-row justify-content-between align-items-center p-0 m-0"
+  >
+    <li>
+      <img
+        src="../../../../assets/images/notification.svg"
+        width="25"
+        height="25"
+        alt="notification"
+      />
+    </li>
+    <li (click)="op.toggle($event)">
+      <img
+        src="../../../../assets/images/user.svg"
+        width="25"
+        height="25"
+        alt="user"
+      />
+    </li>
+  </ul>
+</div>
+<p-overlayPanel #op [baseZIndex]="99999" [style]="{ width: '60%' }">
+  <ul class="user-options m-0 p-0">
+    <li (click)="viewProfile(); op.hide()">My Profile</li>
+    <!-- <li (click)="resetPassword(); op.hide()">Change Password</li> -->
+    <li (click)="logout(); op.hide()">Logout</li>
+  </ul>
+</p-overlayPanel>

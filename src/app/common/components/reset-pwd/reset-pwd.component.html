@@ -1,0 +1,90 @@
+<p-toast position="top-right" key="tl"></p-toast>
+<div class="main-content">
+  <div class="container-fluid p-0">
+    <div class="login-block">
+      <img
+        class="logo"
+        src="../../../../assets/images/logo.svg"
+        widt="200"
+        height="60"
+        alt="logo"
+      />
+      <div class="login-background p-grid h-100 w-100">
+        <div
+          class="
+            p-col-12 p-md-12 p-lg-6 p-sm-12
+            d-flex
+            flex-column
+            align-items-center
+            justify-content-center
+            ml-auto
+          "
+        >
+          <div
+            class="
+              login-form
+              d-flex
+              flex-column
+              justify-content-center
+              align-items-center
+            "
+          >
+            <div class="login-form-content">
+              <h2>
+                <a (click)="goBack()">Reset Password</a>
+              </h2>
+              <p class="text-email">
+                Enter your Email-ID associated with your account to reset your
+                password.
+              </p>
+              <form
+                [formGroup]="passwordReset"
+                (keydown.enter)="resetPassword()"
+              >
+                <label for="userId">Mail ID</label>
+                <input
+                  id="mailID"
+                  type="text"
+                  pInputText
+                  class="form-control p-mb-6"
+                  placeholder="username@gmail.com"
+                  formControlName="email"
+                />
+                <div
+                  *ngIf="
+                    passwordReset.get('email').errors &&
+                    passwordReset.controls['email'].touched
+                  "
+                  class="p-mb-3"
+                >
+                  <div *ngIf="passwordReset.get('email').errors.required">
+                    <p class="error-msg">Email ID is required</p>
+                  </div>
+                  <div *ngIf="passwordReset.get('email').errors.email">
+                    <p class="error-msg">Enter a valid Email ID</p>
+                  </div>
+                </div>
+
+                <button
+                  pButton
+                  label="Submit"
+                  class="button"
+                  type="button"
+                  [disabled]="!passwordReset.valid || disableSubmit"
+                  (click)="resetPassword()"
+                  value="Submit"
+                ></button>
+              </form>
+              <br />
+              <p-progressBar
+                *ngIf="disableSubmit"
+                mode="indeterminate"
+                [style]="{ height: '6px' }"
+              ></p-progressBar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

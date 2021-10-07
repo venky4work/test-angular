@@ -1,0 +1,128 @@
+<div class="sidebar">
+  <div class="side-bar-in text-left">
+    <div class="menu-logo d-flex flex-row justify-content-center">
+      <figure>
+        <a>
+          <img
+            src="../../../../assets/images/logo.svg"
+            width="160"
+            height="40"
+            alt="logo"
+        /></a>
+      </figure>
+    </div>
+    <div class="clear"></div>
+    <nav class="navbar p-0 d-lg-block d-lg-flex navbar-expand-lg">
+      <button
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        class="navbar-toggler"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div id="navbarSupportedContent" class="collapse navbar-collapse">
+        <ul>
+          <li>
+            <a
+              [ngClass]="{ active: selectedValue === 'dashboard' }"
+              (click)="navigateURL('dashboard')"
+              ><em
+                ><img
+                  src="../../../../assets/images/dashboard-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="dashboard" /></em
+              >Dashboard</a
+            >
+          </li>
+          <li>
+            <a
+              [ngClass]="{ active: selectedValue === 'user' }"
+              (click)="navigateURL('user')"
+              ><em
+                ><img
+                  src="../../../../assets/images/user-mgmt-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="users" /></em
+              >User Management</a
+            >
+          </li>
+          <li>
+            <a
+              [ngClass]="{ active: selectedValue === 'company' }"
+              (click)="navigateURL('company')"
+              ><em
+                ><img
+                  src="../../../../assets/images/companies-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="companies" /></em
+              >Companies</a
+            >
+          </li>
+          <li>
+            <a
+              [ngClass]="{ active: selectedValue === 'setup' }"
+              (click)="navigateURL('setup')"
+              ><em
+                ><img
+                  src="../../../../assets/images/settings-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="cog-line" /></em
+              >Setup & Config</a
+            >
+          </li>
+          <li>
+            <a
+              routerLinkActive="active"
+              [ngClass]="{ active: selectedValue === 'employee' }"
+              (click)="navigateURL('employee')"
+              ><em
+                ><img
+                  src="../../../../assets/images/employees-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="employees" /></em
+              >Employees</a
+            >
+          </li>
+
+          <li>
+            <a
+              [ngClass]="{ active: selectedValue === 'payroll' }"
+              (click)="navigateURL('payroll')"
+              ><em
+                ><img
+                  src="../../../../assets/images/payroll-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="payroll" /></em
+              >Payroll</a
+            >
+          </li>
+          <li>
+            <a
+              [ngClass]="{ active: selectedValue === 'reports' }"
+              (click)="navigateURL('reports')"
+              ><em
+                ><img
+                  src="../../../../assets/images/reports-icon.svg"
+                  width="20"
+                  height="25"
+                  alt="reports" /></em
+              >Reports</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

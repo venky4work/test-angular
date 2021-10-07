@@ -1,0 +1,133 @@
+<p-toast position="top-right" key="tl"></p-toast>
+
+<div class="main-content">
+  <div class="container-fluid p-0">
+    <div class="login-block">
+      <img
+        class="logo"
+        src="../../../../assets/images/logo.svg"
+        widt="200"
+        height="60"
+        alt="logo"
+      />
+      <div class="login-background p-grid h-100 w-100">
+        <div
+          class="
+            p-col-12 p-md-12 p-lg-6 p-sm-12
+            d-flex
+            flex-column
+            align-items-center
+            justify-content-center
+            ml-auto
+          "
+        >
+          <div
+            class="
+              login-form
+              d-flex
+              flex-column
+              justify-content-center
+              align-items-center
+            "
+          >
+            <div class="login-form-content">
+              <h2><a (click)="goBack()">Create Password</a></h2>
+              <form
+                [formGroup]="createPwdForm"
+                (keydown.enter)="resetPassword()"
+              >
+                <div class="input-holder">
+                  <label for="userId">New Password</label>
+                  <div class="div-pwd">
+                    <input
+                      #password1
+                      pInputText
+                      [type]="showNewPasswordText ? 'text' : 'password'"
+                      class="form-control pwd"
+                      placeholder="Password"
+                      formControlName="newPassword"
+                      (keyup)="onNewChangePwd()"
+                      [ngClass]="{
+                        'font-lg': !showNewPasswordText,
+                        'font-sm': showNewPasswordText
+                      }"
+                    />
+                    <img
+                      [src]="!showNewPasswordText ? showEye : hideEye"
+                      (click)="onShowNewPassword()"
+                      style="cursor: pointer"
+                    />
+                  </div>
+                  <div
+                    *ngIf="
+                      createPwdForm.get('newPassword').errors &&
+                      createPwdForm.controls['newPassword'].touched
+                    "
+                  >
+                    <div
+                      *ngIf="createPwdForm.get('newPassword').errors.required"
+                    >
+                      <p class="error-msg">Password is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-holder">
+                  <label>Confirm Password</label>
+
+                  <div class="div-pwd">
+                    <input
+                      #password2
+                      pInputText
+                      [type]="showConfirmPasswordText ? 'text' : 'password'"
+                      class="form-control pwd"
+                      placeholder="Password"
+                      formControlName="confirmPassword"
+                      (keyup)="onChangePwd()"
+                      [ngClass]="{
+                        'font-lg': !showConfirmPasswordText,
+                        'font-sm': showConfirmPasswordText
+                      }"
+                    />
+                    <img
+                      [src]="!showConfirmPasswordText ? showEye : hideEye"
+                      (click)="onShowConfirmPassword()"
+                      style="cursor: pointer"
+                    />
+                  </div>
+                  <div
+                    *ngIf="
+                      createPwdForm.controls['confirmPassword'].touched ||
+                      createPwdForm.controls['confirmPassword'].dirty
+                    "
+                  >
+                    <p *ngIf="passwordMismatch" class="error-msg">
+                      Password doesn't match
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  pButton
+                  label="Submit"
+                  class="button"
+                  type="button"
+                  [disabled]="
+                    !createPwdForm.valid || passwordMismatch || disableSubmit
+                  "
+                  (click)="resetPassword()"
+                  value="Login"
+                ></button>
+              </form>
+              <br />
+              <p-progressBar
+                *ngIf="isLoading"
+                mode="indeterminate"
+                [style]="{ height: '6px' }"
+              ></p-progressBar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

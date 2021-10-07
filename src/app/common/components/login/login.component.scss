@@ -1,0 +1,237 @@
+.login-block {
+  background: transparent
+    radial-gradient(closest-side at 50% 50%, #02aacf 0%, #015e73 100%) 0% 0%
+    no-repeat padding-box;
+  background-size: 100% 100%;
+  width: 100%;
+  min-height: 100%;
+  padding: 40px;
+  height: 100%;
+
+  .login-background {
+    background-image: url(../../../../assets/images/theme.png);
+    background-size: 700px;
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: center;
+  }
+  .logo {
+    width: 200px;
+    cursor: pointer;
+    margin-bottom: auto;
+    position: absolute;
+    padding-bottom: 15px;
+  }
+
+  .login-form {
+    max-width: 100%;
+    min-height: 80%;
+    width: 94%;
+    height: 95%;
+    padding: 0px;
+    background-color: #ffffff;
+    border-radius: 15px;
+
+    .login-form-content {
+      padding: 30px;
+      margin: 0 auto;
+      width: 76%;
+      h2 {
+        padding-bottom: 3rem;
+      }
+      label {
+        font-size: 14px;
+        color: #041519;
+        line-height: 3rem;
+        font-weight: 500;
+        margin-top: 5px;
+      }
+
+      .div-pwd {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        border: 0.5px solid #dbdbdb !important;
+        border-radius: 8px;
+        height: auto;
+        padding: 0;
+        padding-right: 11px !important;
+        margin-bottom: 10px;
+        align-items: center;
+        img {
+          height: 20px;
+        }
+        .pwd {
+          border: none !important;
+          padding-bottom: 5px !important;
+          margin-bottom: 0 !important;
+          margin-top: 0 !important;
+          padding-top: 0 !important;
+          background: transparent !important;
+          font-size: 22px !important;
+        }
+        .pwd::placeholder {
+          font-size: 16px !important;
+        }
+        .font-sm {
+          font-size: 16px !important;
+        }
+        .font-lg {
+          font-size: 28px !important;
+          letter-spacing: 2px;
+        }
+      }
+
+      .forgot-password {
+        ul li:nth-child(1) {
+          input {
+            visibility: hidden;
+          }
+          .remember {
+            padding-left: 10px;
+            cursor: pointer;
+            padding-right: 10px;
+          }
+          /* Create a custom checkbox */
+        }
+        ul li:nth-child(2) a {
+          font-size: 16px;
+          line-height: 22px;
+          color: #0f92af;
+          font-weight: 400;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+input::placeholder {
+  color: #dfdfdf !important;
+  font-family: "Montserrat", sans-serif !important;
+  letter-spacing: 0px;
+}
+.flexHolder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  input {
+    visibility: hidden;
+  }
+
+  ul li:nth-child(1) a {
+    font-size: 14px;
+    line-height: 22px;
+    color: #1db9db;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .container {
+    display: flex;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    align-items: center;
+    label {
+      line-height: 0 !important;
+      margin: 0 !important;
+    }
+  }
+
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    // top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #eee;
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #1797b4;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .login-form {
+    height: 80% !important;
+  }
+  .login-block {
+    padding: 10px !important;
+    height: 80% !important;
+    .login-background {
+      background: none;
+      margin: 0 !important;
+    }
+
+    .login-form-content {
+      width: 100% !important;
+      h2 {
+        padding-bottom: 0.5rem !important;
+        padding-top: 1rem;
+      }
+      label {
+        font-size: 12px !important;
+      }
+      .flexHolder ul li:nth-child(1) a {
+        font-size: 12px !important;
+        line-height: 22px;
+        color: #0f92af;
+        font-weight: 400;
+        cursor: pointer;
+      }
+    }
+  }
+}

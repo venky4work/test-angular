@@ -1,0 +1,630 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/variable.scss";
+html,
+body {
+  width: 100%;
+  height: 100%;
+  color: #b1b1b1;
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 12px;
+  background: #eaf1f2;
+  color: #1f203b;
+}
+* {
+  font-family: "Montserrat";
+}
+
+.main-content,
+.container-fluid {
+  height: 100% !important;
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 700;
+  color: $blackTextColor;
+}
+
+.p-inputtext {
+  margin-bottom: 10px !important;
+  height: 50px;
+  border-radius: 6px !important;
+  border: 0.5px solid #dbdbdb !important;
+  font-size: 16px !important;
+  color: $themeTextColor !important;
+  background-color: #fff;
+  padding: 5px 15px !important;
+  box-shadow: none;
+  font-family: "Montserrat" !important;
+}
+
+.p-inputtext::placeholder {
+  color: #a5c3c9;
+}
+
+.status {
+  padding: 0 30px 0 0;
+  label {
+    position: relative;
+    input {
+      opacity: 0;
+      position: absolute;
+    }
+    span:before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      border: 1px solid $greenTextColor;
+      left: 0;
+    }
+    input:checked ~ span:after {
+      display: block;
+    }
+    span:after {
+      content: "";
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: $greenTextColor;
+      left: 6px;
+      top: 6px;
+      display: none;
+    }
+  }
+  ul li {
+    padding: 0 0 0 15px;
+    span {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      padding: 0 0 0 30px;
+      color: #0e233d;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      font-weight: 500;
+    }
+  }
+  li:nth-child(2) label input:checked ~ span:after {
+    background-color: $redTextColor;
+  }
+  li:nth-child(2) span:before {
+    border-color: $redTextColor;
+  }
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: none !important;
+}
+
+.error-msg {
+  padding: 5px 0px;
+  color: $redTextColor;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+li {
+  list-style: none;
+  background-image: none;
+  background-repeat: none;
+  background-position: 0;
+}
+h3 {
+  color: $blackTextColor;
+}
+.button {
+  width: 100% !important;
+  background: $themeTextColor !important;
+  background-color: $themeTextColor !important;
+  // height: 50px !important;
+  border-color: $themeTextColor !important;
+  border-radius: 7px !important;
+}
+label {
+  color: $blackTextColor;
+  font-size: 15px;
+  font-weight: 500;
+  padding-top: 15px;
+}
+sup {
+  color: $redTextColor;
+}
+.p-button-label {
+  font-size: 16px !important;
+  font-weight: 300 !important;
+  padding: 5px 0px;
+}
+
+.p-button:enabled:active,
+.p-button:enabled:hover,
+.p-button:enabled:focus {
+  background: $themeButtonHoverColor !important;
+  border-color: $themeButtonHoverColor !important;
+  box-shadow: none;
+}
+
+.p-button {
+  margin: 0 !important;
+  display: inline-flex !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  align-items: center !important;
+  vertical-align: bottom !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  align-items: center !important;
+  position: relative !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  color: #f1f7fe !important;
+  background: $themeTextColor !important;
+  border: 1px solid $themeTextColor !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+}
+
+.md-btn.p-button {
+  margin: 0 !important;
+  display: inline-flex !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  align-items: center !important;
+  vertical-align: bottom !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  align-items: center !important;
+  position: relative !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  color: #f1f7fe !important;
+  background: $themeTextColor !important;
+  border: 1px solid $themeTextColor !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  width: 65% !important;
+}
+.button-green.p-button {
+  margin: 0 !important;
+  display: inline-flex !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  align-items: center !important;
+  vertical-align: bottom !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  align-items: center !important;
+  position: relative !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  color: $greenTextColor !important;
+  background: #d4f9c9 !important;
+  border: 1px solid $greenTextColor !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  width: 50%;
+}
+.button-red.p-button {
+  margin: 0 !important;
+  display: inline-flex !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  align-items: center !important;
+  vertical-align: bottom !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  align-items: center !important;
+  position: relative !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  color: $redTextColor !important;
+  background: #fee4e6 !important;
+  border: 1px solid $redTextColor !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  width: 50%;
+}
+.button-green.p-button:enabled:active,
+.button-green.p-button:enabled:hover,
+.button-green.p-button:enabled:focus {
+  background: #bdefaf !important;
+  border-color: $greenTextColor !important;
+  color: $greenTextColor !important;
+  box-shadow: none;
+}
+.button-red.p-button:enabled:active,
+.button-red.p-button:enabled:hover,
+.button-red.p-button:enabled:focus {
+  background: #fcd6d9 !important;
+  border-color: $redTextColor !important;
+  color: $redTextColor !important;
+  box-shadow: none;
+}
+
+.p-button-text {
+  margin: 0 !important;
+  display: inline-flex !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  align-items: center !important;
+  vertical-align: bottom !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  align-items: center !important;
+  position: relative !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  color: $themeTextColor !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+  // border-radius: 8px !important;
+}
+
+.p-button-text:enabled:active,
+.p-button-text:enabled:hover,
+.p-button-text:enabled:focus {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none;
+}
+
+.p-confirm-dialog-accept {
+  width: 31% !important;
+}
+// dialog styles
+
+.p-dialog .p-dialog-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.p-dialog .p-dialog-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.p-dialog .p-dialog-header-icons {
+  display: none !important;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  justify-content: center;
+  font-size: 16px;
+  color: $blackTextColor !important;
+  height: 70%;
+}
+.p-dialog.p-confirm-dialog.p-component {
+  height: 12vw;
+}
+
+.p-dialog .p-dialog-header .p-dialog-title {
+  font-weight: 500 !important;
+  font-size: 1.9rem !important;
+  color: #0e233d !important;
+}
+
+// .p-dialog-footer {
+
+// }
+.p-confirm-dialog-reject {
+  background: transparent !important;
+  border: none !important;
+  color: $blackTextColor !important;
+  span {
+    font-weight: 400 !important;
+  }
+}
+.p-confirm-dialog-reject:enabled:hover {
+  background: transparent !important;
+  border: none !important;
+  color: $blackTextColor !important;
+}
+
+.p-dialog-mask.p-component-overlay {
+  background-color: $blackTextColor !important;
+}
+
+// otp
+
+.otp-input,
+.otp-input:focus {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid #c5c5c5 !important;
+  text-align: center;
+  font-size: 24px;
+}
+
+.p-progressbar .p-progressbar-value {
+  background: $themeTextColor !important;
+}
+
+.custom-spinner .p-progress-spinner-circle {
+  animation: custom-progress-spinner-dash 1.5s ease-in-out infinite,
+    custom-progress-spinner-color 6s ease-in-out infinite !important;
+}
+
+.search-input {
+  background-color: #eaf1f2 !important;
+  border: 1px solid #c0d0d4 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  padding-left: 35px !important;
+  width: 600px !important;
+  // top: 44% !important;
+}
+.search-input::placeholder {
+  color: #b8ccd1 !important;
+  font-size: 1.7rem;
+}
+
+.p-input-icon-left > i:first-of-type {
+  left: 1rem !important;
+  // color: #b8ccd1 !important;
+}
+
+.p-input-icon-left > i,
+.p-input-icon-right > i {
+  top: 36% !important;
+  color: #b8ccd1 !important;
+  font-size: 1.5rem;
+}
+
+// overlay
+
+.p-overlaypanel.p-component {
+  top: 100px !important;
+  width: 16% !important;
+  box-shadow: 0px 0px 16px #0a162312;
+  border-radius: 8px !important;
+}
+.p-overlaypanel .p-overlaypanel-content {
+  background-color: #ffffff !important;
+  padding: 1rem 0rem !important;
+  border-radius: 8px !important;
+}
+
+.p-overlaypanel.p-overlaypanel-flipped:after {
+  border-top-color: #ffffff !important;
+}
+
+.p-overlaypanel.p-overlaypanel-flipped:before {
+  border-top-color: #ffffff !important;
+}
+
+// datepicker
+
+.p-datepicker .p-datepicker-header {
+  color: #000000 !important;
+  background: $themeTextColor !important;
+  border-bottom: 1px solid $themeTextColor !important;
+  padding: 0.5rem !important;
+}
+
+.p-datepicker table td > span {
+  width: 2rem !important;
+  height: 2rem !important;
+  font-size: 14px !important;
+}
+
+.p-datepicker table th {
+  padding: 0.2rem !important;
+  span {
+    font-size: 14px !important;
+  }
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-prev,
+.p-datepicker .p-datepicker-header .p-datepicker-next {
+  color: white !important;
+}
+
+.p-datepicker-month,
+.p-datepicker-year {
+  color: $themeTextColor !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title select {
+  border: 1px solid $themeTextColor;
+  padding: 0px !important;
+}
+
+.p-datepicker {
+  background: #d8eff3 !important;
+  padding: 0px !important;
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  background: $themeTextColor !important;
+  color: #ffffff !important;
+  border-radius: 0px !important;
+}
+
+.p-datepicker table td > span {
+  color: #000000 !important;
+}
+
+.p-datepicker table td > span.p-highlight,
+.p-datepicker:not(.p-disabled)
+  table
+  td
+  span:not(.p-highlight):not(.p-disabled):hover {
+  border-radius: 0px !important;
+  background: #63c3d9 !important;
+}
+
+.p-datepicker table td {
+  padding: 5px !important;
+}
+//p-dropdown
+
+.p-dropdown {
+  height: 50px !important;
+  border-radius: 6px !important;
+  border: 0.5px solid #dbdbdb !important;
+  .pi {
+    color: $themeTextColor !important;
+    font-weight: 500 !important;
+    font-size: 1.4rem !important;
+  }
+  .p-inputtext {
+    margin: 0px !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
+// multi-select-dropdown
+.p-multiselect {
+  height: 50px;
+  border-radius: 6px !important;
+  border: 0.5px solid #dbdbdb !important;
+  display: flex !important;
+  align-items: center !important;
+  .pi {
+    color: $themeTextColor;
+    font-weight: 500 !important;
+    font-size: 1.4rem !important;
+  }
+  .p-multiselect-panel {
+    min-width: 15% !important;
+    .p-multiselect-items {
+      .p-multiselect-item.p-highlight {
+        color: $themeTextColor;
+        background: #dfeef1;
+      }
+      // .multiselect-item:focus {
+      //   box-shadow: none !important;
+      // }
+    }
+    .p-multiselect-items .p-multiselect-item:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  .p-multiselect-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+  .p-multiselect-filter.p-inputtext {
+    height: 30px !important;
+    margin: 0 !important;
+  }
+  .p-multiselect-label.p-placeholder {
+    color: #a5c3c9 !important;
+    font-size: 16px !important;
+  }
+}
+.p-multiselect.p-multiselect-chip .p-multiselect-token {
+  background: #dfeef1 !important;
+  color: $themeTextColor;
+}
+
+//p-checkbox
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: $themeTextColor !important;
+  background: $themeTextColor !important;
+}
+
+.separator {
+  padding: 0;
+  border-bottom: 2px dashed #adc3d3;
+  width: 100%;
+  height: 0px;
+  margin: 20px auto;
+}
+@keyframes custom-progress-spinner-color {
+  100%,
+  0% {
+    stroke: $themeTextColor;
+  }
+}
+
+@keyframes custom-progress-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  // body,
+  // html {
+  //   height: fit-content;
+  //   width: fit-content;
+  //   height: -webkit-fit-content;
+  //   width: -webkit-fit-content;
+  // }
+}
+
+@media screen and (min-width: 461px) and(max-width: 1280px) {
+  // MDPI
+  .sidebar {
+    width: 21% !important;
+  }
+  .company-blk,
+  .add-company-blk {
+    width: 79% !important;
+  }
+  .companies-cnt {
+    .company-active-list {
+      ul {
+        li {
+          p {
+            font-size: 13px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  // HiDPI
+  .sidebar {
+    width: 19% !important;
+  }
+
+  .company-blk,
+  .add-company-blk {
+    width: 81% !important;
+  }
+  .companies-cnt {
+    .company-active-list {
+      ul {
+        li {
+          p {
+            font-size: 13px !important;
+          }
+        }
+      }
+    }
+  }
+}

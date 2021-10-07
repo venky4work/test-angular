@@ -1,0 +1,361 @@
+<app-sidebar></app-sidebar>
+<div class="company-details-blk">
+  <div class="company-details-in">
+    <div class="company-details-top">
+      <h3 (click)="onCancelClick()">{{ companyDetails?.name }}</h3>
+    </div>
+
+    <ul class="tabs p-grid p-d-flex p-flex-wrap p-p-0">
+      <li
+        class="tab1"
+        [ngClass]="{ active: tabIndex == 1 }"
+        (click)="switchActiveTabs(1)"
+      >
+        <a>Company Details</a>
+      </li>
+      <li
+        class="tab2"
+        [ngClass]="{ active: tabIndex == 2 }"
+        (click)="switchActiveTabs(2)"
+      >
+        <a>Employees Details</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="company-details-inner" *ngIf="isCompanyDataLoaded">
+    <div class="company-details-inner-in text-left" *ngIf="tabIndex == 1">
+      <div class="companies-logo p-d-flex p-flex-row p-jc-between">
+        <figure>
+          <img
+            [src]="'data:image/png;base64,' + companyDetails?.companyLogo"
+            onError="this.src='../../../../assets/images/no-logo.png'"
+            width="100"
+            height="100"
+            alt="logo"
+          />
+        </figure>
+        <div class="edit">
+          <a class="p-d-flex p-ai-center p-jc-center"
+            ><img
+              src="../../../../assets/images/edit.svg"
+              width="10"
+              height="10"
+              alt="edit"
+              (click)="editCompany()"
+          /></a>
+        </div>
+      </div>
+      <h3>{{ companyDetails?.name }}</h3>
+      <div class="company-active">
+        <ul class="p-d-flex p-p-0">
+          <li>
+            <p>
+              <span
+                *ngIf="companyDetails && companyDetails?.isActive"
+                [ngClass]="{
+                  active: companyDetails?.isActive,
+                  inactive: !companyDetails?.isActive
+                }"
+                >Active</span
+              >
+              <span
+                *ngIf="companyDetails && !companyDetails?.isActive"
+                [ngClass]="{
+                  active: companyDetails?.isActive,
+                  inactive: !companyDetails?.isActive
+                }"
+                >InActive</span
+              >
+            </p>
+          </li>
+          <li
+            class="active-date"
+            *ngIf="
+              companyDetails?.activatedOn !== '' &&
+              companyDetails?.activatedOn !== null
+            "
+          >
+            <p>
+              <span
+                >-
+                {{ companyDetails?.activatedOn | date: "dd MMM yyyy" }}
+                -
+              </span>
+            </p>
+          </li>
+          <li class="active-date">
+            <p>
+              <span
+                *ngIf="
+                  companyDetails?.inactiveOn !== '' &&
+                  companyDetails?.inactiveOn !== null
+                "
+              >
+                -
+                {{ companyDetails?.inactiveOn | date: "dd MMM yyyy" }}
+                -
+              </span>
+            </p>
+          </li>
+
+          <li class="countries">
+            <p>
+              <span
+                *ngFor="
+                  let companyCountry of companyDetails?.countries;
+                  let last = last
+                "
+                >{{ companyCountry?.name
+                }}<ng-container *ngIf="!last">, </ng-container>
+              </span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="contact">
+        <ul class="p-grid p-d-flex p-flex-row p-p-0">
+          <li class="phone p-col-12 p-md-4 p-lg-4 p-sm-12">
+            <a
+              href="tel:{{ companyDetails?.phonePrefix }}{{
+                companyDetails?.phoneNo
+              }}"
+              ><span
+                ><img
+                  src="../../../../assets/images/phone.svg"
+                  width="20"
+                  height="20"
+                  alt="phone"
+                />{{ companyDetails?.phonePrefix }}</span
+              >{{
+                companyDetails?.phoneNo
+                  ? "-" + companyDetails?.phoneNo
+                  : "Not available"
+              }}</a
+            >
+          </li>
+          <li class="email p-col-12 p-md-4 p-lg-4 p-sm-12">
+            <a href="mailto:{{ companyDetails?.emailId }}"
+              ><span
+                ><img
+                  src="../../../../assets/images/email.svg"
+                  width="20"
+                  height="20"
+                  alt="email" /></span
+              >{{
+                companyDetails?.emailId
+                  ? companyDetails?.emailId
+                  : "Not available"
+              }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="responsible">
+        <ul class="p-grid p-d-flex p-flex-row p-p-0">
+          <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-flex-column">
+            <label>Responsible Person</label>
+            <p>
+              {{
+                companyDetails?.responsiblePerson
+                  ? companyDetails?.responsiblePerson
+                  : "Not available"
+              }}
+            </p>
+          </li>
+          <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-flex-column">
+            <label>CIN</label>
+            <p>
+              {{
+                companyDetails?.cinnumber
+                  ? companyDetails?.cinnumber
+                  : "Not available"
+              }}
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="address">
+        <ul class="p-grid p-d-flex p-flex-row p-p-0">
+          <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 p-flex-column p-pl-4">
+            <label>Address</label>
+            <p>
+              <span
+                >{{
+                  companyDetails?.headQuartersAddress
+                    ? companyDetails?.headQuartersAddress
+                    : "Not available"
+                }}
+              </span>
+              <span *ngIf="companyDetails?.city">
+                {{ "," + companyDetails?.city }},
+              </span>
+              <span *ngIf="companyDetails?.state"
+                >{{ companyDetails?.state }} -
+              </span>
+              <span *ngIf="companyDetails?.zipCode">{{
+                companyDetails?.zipCode
+              }}</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="pf-details">
+        <ul class="p-grid p-d-flex p-flex-row p-p-0">
+          <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-flex-column">
+            <label>PF</label>
+            <p>
+              {{
+                companyDetails?.pfnumber
+                  ? companyDetails?.pfnumber
+                  : "Not available"
+              }}
+            </p>
+          </li>
+          <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-flex-column">
+            <label>ESI</label>
+            <p>
+              {{ companyDetails?.esi ? companyDetails?.esi : "Not available" }}
+            </p>
+          </li>
+          <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-flex-column">
+            <label>TAN</label>
+            <p>
+              {{
+                companyDetails?.tannumber
+                  ? companyDetails?.tannumber
+                  : "Not available"
+              }}
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="separator"></div>
+
+      <h4>Branches</h4>
+      <div
+        class="branch-blk"
+        *ngFor="let branch of companyDetails?.branchModels"
+      >
+        <h3>{{ branch?.name }}</h3>
+        <div class="company-active">
+          <ul class="p-d-flex p-p-0">
+            <li>
+              <p>
+                <span
+                  *ngIf="branch && branch?.isActive"
+                  [ngClass]="{
+                    active: branch?.isActive,
+                    inactive: !branch?.isActive
+                  }"
+                  >Active</span
+                >
+                <span
+                  *ngIf="branch && !branch?.isActive"
+                  [ngClass]="{
+                    active: branch?.isActive,
+                    inactive: !branch?.isActive
+                  }"
+                  >Inactive</span
+                >
+              </p>
+            </li>
+            <li
+              *ngIf="branch?.isActive && branch?.activatedOn"
+              class="active-date"
+            >
+              <p>
+                <span> - {{ branch?.activatedOn | date: "dd MMM yyyy" }}</span>
+              </p>
+            </li>
+            <li
+              *ngIf="!branch?.isActive && branch?.inactiveOn"
+              class="active-date"
+            >
+              <p>
+                <span> - {{ branch?.inactiveOn | date: "dd MMM yyyy" }}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="contact">
+          <ul class="p-grid p-d-flex p-flex-row p-p-0">
+            <li class="phone p-col-12 p-md-4 p-lg-4 p-sm-12">
+              <a href="tel:{{ branch?.phonePrefix }}{{ branch?.phoneNo }}"
+                ><span
+                  ><img
+                    src="../../../../assets/images/phone.svg"
+                    width="20"
+                    height="20"
+                    alt="phone"
+                  />{{
+                    branch?.phonePrefix && companyDetails?.phoneNo
+                      ? branch?.phonePrefix
+                      : ""
+                  }}</span
+                >{{
+                  companyDetails?.phoneNo
+                    ? "-" + companyDetails?.phoneNo
+                    : "Not available"
+                }}</a
+              >
+            </li>
+            <li class="email p-col-12 p-md-4 p-lg-4 p-sm-12">
+              <a href="mailto:{{ branch?.emailId }}"
+                ><span
+                  ><img
+                    src="../../../../assets/images/email.svg"
+                    width="20"
+                    height="20"
+                    alt="email" /></span
+                >{{
+                  branch?.emailId !== null ? branch?.emailId : "Not available"
+                }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="responsible">
+          <ul class="p-grid p-d-flex p-flex-row p-p-0">
+            <li class="p-col-12 p-md-4 p-lg-4 p-sm-12 p-flex-column">
+              <label>Responsible Person</label>
+              <p>
+                {{
+                  branch?.responsiblePerson
+                    ? branch?.responsiblePerson
+                    : "Not available"
+                }}
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="address">
+          <ul class="p-grid p-d-flex p-flex-row p-p-0">
+            <li class="p-col-12 p-md-6 p-lg-6 p-sm-12 p-flex-column p-pl-4">
+              <label>Address</label>
+              <p>
+                <span
+                  >{{
+                    branch.areaAndStreet
+                      ? branch.areaAndStreet
+                      : "Not available"
+                  }},
+                </span>
+                <span *ngIf="branch?.city && branch.areaAndStreet"
+                  >{{ ", " + branch?.city }},
+                </span>
+                <span *ngIf="branch.areaAndStreet && branch?.state">
+                  {{ branch?.state }} -
+                </span>
+                <span *ngIf="branch.areaAndStreet && branch?.zipCode">{{
+                  branch?.zipCode
+                }}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="separator"></div>
+      </div>
+    </div>
+  </div>
+</div>

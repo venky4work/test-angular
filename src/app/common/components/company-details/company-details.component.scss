@@ -1,0 +1,151 @@
+@import "../../../../assets/styles/variable.scss";
+
+.company-details-blk {
+  height: 100%;
+  width: 85%;
+  padding: 50px 100px;
+  margin-left: auto;
+  .company-details-in {
+    .company-details-top {
+      padding: 0 0 30px 0;
+      h3 {
+        position: relative;
+        padding: 0 0 0 44px;
+        font-weight: 600;
+      }
+      h3:before {
+        cursor: pointer;
+        content: "";
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        background: url(../../../../assets/images/back-arrow.svg) no-repeat;
+        background-size: contain;
+        width: 25px;
+        height: 20px;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+      }
+    }
+    .tabs {
+      .tab1,
+      .tab2 {
+        border-bottom: 3px solid #cddbde;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        a {
+          font-size: $font18;
+          line-height: 24px;
+          color: #758487;
+          font-weight: 500;
+          display: inline-block;
+          cursor: pointer;
+          padding: 0 10px 5px 30px;
+        }
+      }
+      .tab1 a {
+        padding: 0 30px 5px 10px !important;
+      }
+      .tab1.active,
+      .tab2.active {
+        border-bottom: 4px solid $themeTextColor;
+        a {
+          font-weight: 700;
+          padding: 0 0 5px 0 !important;
+          font-size: 20px;
+          color: $blackTextColor;
+        }
+      }
+    }
+  }
+
+  .company-details-inner {
+    padding: 30px 0 0 0;
+    .company-details-inner-in {
+      background: #ffffff;
+      padding: 60px 40px;
+      border-radius: 15px;
+      h3 {
+        font-size: $font28;
+        font-weight: 600;
+      }
+      .edit {
+        a {
+          width: 30px;
+          height: 30px;
+          background-color: #cbecf4;
+          border-radius: 100%;
+          cursor: pointer;
+        }
+      }
+      .companies-logo {
+        figure {
+          img {
+            width: $profileImgHeight;
+            height: $profileImgHeight;
+            background: #ffffff;
+            border-radius: 100%;
+            box-shadow: 0px 3px 6px #75848729;
+          }
+        }
+      }
+      .company-active {
+        font-size: $font14;
+        .active {
+          color: $greenTextColor;
+          padding-right: 5px;
+        }
+        .inactive {
+          color: $redTextColor;
+          padding-right: 5px;
+        }
+        .active-date {
+          span {
+            color: $greyTextColor;
+            padding-right: 5px;
+          }
+        }
+        .countries {
+          font-size: $font14;
+          color: $blackTextColor;
+        }
+      }
+      .contact {
+        // ul {
+        //   line-height: 4rem;
+        // }
+        .phone,
+        .email {
+          a {
+            color: $blackTextColor !important;
+            font-size: $font16;
+          }
+          img {
+            padding-bottom: 3px;
+            margin-right: 5px;
+          }
+          a:hover {
+            text-decoration: none;
+            color: $blackTextColor !important;
+          }
+        }
+      }
+      .responsible,
+      .address,
+      .pf-details {
+        label {
+          color: $greyTextColor;
+        }
+        p {
+          font-size: $font18;
+        }
+      }
+      h4 {
+        font-size: $font24;
+        font-weight: 600;
+      }
+    }
+  }
+}

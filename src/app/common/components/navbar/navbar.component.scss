@@ -1,0 +1,37 @@
+.search-blk {
+  width: 100%;
+  ul {
+    width: 8%;
+    li {
+      cursor: pointer;
+    }
+    li:nth-child(2) {
+      border: 1px solid #b6b6b6 !important;
+      border-radius: 50px;
+      img {
+        margin: 5px;
+      }
+    }
+  }
+}
+.user-options {
+  text-align: left;
+  color: #041519;
+  font-weight: 400;
+  font-size: 16px;
+  li {
+    cursor: pointer;
+    padding: 10px 15px !important;
+  }
+  li:hover {
+    background-color: #e6f1f4;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .search-blk {
+    input {
+      width: 100% !important;
+    }
+  }
+}
